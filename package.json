@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "A map-like interactive set of [reusable charts](http://bost.ocks.org/mike/chart/) for layering visualizations on a common local coordinate system like floor plans.",
   "main": "index.js",
+  "scripts": {
+    "build": "grunt"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dciarletta/d3-floorplan.git"

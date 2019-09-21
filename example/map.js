@@ -1,10 +1,21 @@
 var alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
 
-var svg = d3.select("svg"),
-    width = +svg.attr("width"),
-    height = +svg.attr("height"),
-    g = svg.append("g").attr("transform", "translate(32," + (height / 2) + ")"),
-    map = d3.floorplan(); // initialize floor plan
+// var svg = d3.select("svg"),
+//     width = +svg.attr("width"),
+//     height = +svg.attr("height"),
+//     g = svg.append("g").attr("transform", "translate(32," + (height / 2) + ")");
+    // map = d3.floorplan(); // initialize floor plan
+
+var height = 500;
+var width = 960;
+
+var xscale = d3.scaleLinear()
+    .domain([0, 50.0])
+    .range([0, width]),
+    yscale = d3.scaleLinear()
+        .domain([0, 33.79])
+        .range([0, height]),
+    map = d3.floorplan().xScale(xscale).yScale(yscale);
 
 // Set data
 var mapdata = {
@@ -94,8 +105,8 @@ var mapdata = {
             url: "images/bluetooth_logo.png",
             x: 50,
             y: 50,
-            w: width,
-            h: height
+            w: 32,
+            h: 32
         }]
     }, {
         id: uuid(),
@@ -114,11 +125,17 @@ var mapdata = {
             url: "images/bluetooth_logo.png",
             x: 50,
             y: 50,
-            w: width,
-            h: height
+            w: 32,
+            h: 32
         }]
     }]
 };
+
+var svg = d3.select("#demo").append("svg")
+    .attr("height", height).attr("width", width)
+    .datum(mapdata).call(map);
+
+
 
 // Load Floor image layers
 map.imageLayers(svg, mapdata.floors);
@@ -207,3 +224,5 @@ function uuid() {
 //         .slice(0, Math.floor(Math.random() * 26))
 //         .sort());
 // }, 1500);
+
+
